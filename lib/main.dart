@@ -12,7 +12,10 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/", // 名为"/"的路由作为应用的home(首页)
       routes: {
-        "new_page": (context) => NewRoute(),
+        "new_page": (context) => EchoRoute(),
+        // "new_page": (context) => NewRoute(),
+        "tips": (context) =>
+            TipRoute(text: ModalRoute.of(context).settings.arguments),
         "/": (context) => MyHomePage(title: 'Flutter Demo Home Page!'),
       },
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
@@ -53,39 +56,43 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
-            // Center(
-            RaisedButton(
-              onPressed: () async {
-                // 打开`TipRoute`，并等待返回结果
-                var result = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return TipRoute(
-                        // 路由参数
-                        text: "我是提示xxxxww",
-                      );
-                    },
-                  ),
-                );
-                //输出`TipRoute`路由返回结果
-                print("路由返回值: $result");
-              },
-              child: Text("打开提示页1"),
-            ),
-            // )
-            // FlatButton(
-            //   child: Text('open new route'),
-            //   textColor: Colors.blue,
-            //   onPressed: () {
-            //     Navigator.push(
+            // RaisedButton(
+            //   onPressed: () async {
+            //     // 打开`TipRoute`，并等待返回结果
+            //     var result = await Navigator.push(
             //       context,
-            //       MaterialPageRoute(builder: (context) {
-            //         return NewRoute();
-            //       }),
+            //       MaterialPageRoute(
+            //         builder: (context) {
+            //           return TipRoute(
+            //             // 路由参数
+            //             text: "我是提示xxxxww",
+            //           );
+            //         },
+            //       ),
             //     );
+            //     //输出`TipRoute`路由返回结果
+            //     print("路由返回值: $result");
             //   },
-            // )
+            //   child: Text("打开提示页1"),
+            // ),
+            FlatButton(
+              child: Text('open new route'),
+              textColor: Colors.blue,
+              onPressed: () {
+                // Navigator.pushNamed(context, "new_page", arguments: '111');
+                Navigator.of(context).pushNamed("new_page", arguments: "hi");
+              },
+            ),
+            FlatButton(
+              child: Text('open tips route'),
+              textColor: Colors.yellow,
+              onPressed: () async {
+                // Navigator.pushNamed(context, "new_page", arguments: '111');
+                var res = await Navigator.of(context)
+                    .pushNamed("tips", arguments: "world");
+                print("路由返回值: $res");
+              },
+            )
           ],
         ),
       ),
@@ -106,7 +113,23 @@ class NewRoute extends StatelessWidget {
           title: Text('New Route'),
         ),
         body: Center(
-          child: Text('this is a new route'),
+          child: Text('this is a new route...'),
+        ));
+  }
+}
+
+class EchoRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //获取路由参数
+    var args = ModalRoute.of(context).settings.arguments;
+    // ...省略无关代码
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Echo Route'),
+        ),
+        body: Center(
+          child: Text(args),
         ));
   }
 }

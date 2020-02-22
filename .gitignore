@@ -20,6 +20,6 @@ yarn-error.log*
 *.sln
 *.sw?
 .dart_tool/
-android/
-ios/
-build/
+# android/
+# ios/
+# build/

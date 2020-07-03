@@ -52,7 +52,7 @@ class ProductList extends StatelessWidget {
 
 class ProductDetail extends StatelessWidget {
   final Product product;
-  const ProductDetail({Key key, @required this.product}) : super(key: key);
+  const ProductDetail({Key key, @required this.product});
 
   @override
   Widget build(BuildContext context) {

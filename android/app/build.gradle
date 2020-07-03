@@ -52,10 +52,14 @@ android {
 
     signingConfigs {
         release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+//            keyAlias keystoreProperties['keyAlias']
+//            keyPassword keystoreProperties['keyPassword']
+//            storeFile file(keystoreProperties['storeFile'])
+//            storePassword keystoreProperties['storePassword']
+            keyAlias 'key'
+            keyPassword 'xiaoran'
+            storeFile file('/Users/wuxiaoran/key.jks')
+            storePassword 'xiaoran'
         }
     }
     
